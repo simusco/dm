@@ -1,0 +1,52 @@
+<div class="container" ng-controller="ConsoleViewController">
+	<h2>帽牌货冒菜订单列表<audio src="/DawnLove/audio/cry.mp3" id="order_audio" loop="loop" style="display: none;">您的浏览器不支持 audio 标签。</audio></h2>
+	<div class="panel {{$index % 2 == 0 ? 'panel-warning' : 'panel-default'}}" ng-repeat="result in orders">
+      <div class="panel-heading">
+		<div class="row">
+			<div class="col-lg-10 col-sx-12">
+				<h4>第{{result.order_no}}号订单：</h4>
+				<h4 class="panel-title">
+		            <a ng-click="toggle(result.id)">
+		            	客户电话:{{result.phone}},
+		            	吃饭人数:{{result.members}},
+		            	味道:<b style="color: red;font-size:24px">{{result.hot == 1 ? '微辣' : result.hot == 2 ? '中辣' : '特辣'}}</b>,
+		            	吃饭时间:<b style="color: red;font-size:24px">{{result.eat_time}}</b>,
+		            	荤菜:<b style="color: red;font-size:24px">{{result.meat_weight}}两</b>,
+		            	素菜:<b style="color: red;font-size:24px">{{result.greens_weight}}两</b>,
+		            	是否已处理：{{result.processed == 'Y' ? "是" : "否"}}
+		            </a>
+		         </h4>
+			</div>
+			<div class="col-lg-2 col-sx-12">
+				<input class="btn btn-primary" type="button" ng-click="make(result.id)" value="开始制作" ng-show="result.processed == 'N'">
+			</div>
+		</div>
+      </div>
+      <div id="{{result.id}}" class="panel-collapse collapse">
+         <div class="panel-body">
+         	<form role="form">
+				<table class="table table-striped">
+					<thead>
+						<tr><th>荤菜名称</th></tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="menu in result.hmenuList">
+							<td class="col-lg-12">{{menu.name}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table table-striped">
+					<thead>
+						<tr><th>素菜名称</th></tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="menu in result.smenuList">
+							<td class="col-lg-12">{{menu.name}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="container" ng-controller="BookViewController">
+	<h2>帽牌货点餐</h2>
+	<form role="form">
+	   <div class="form-group">
+	      <label for="name">你的联系电话</label>
+	      <input ng-model="order.phone" type="text" class="form-control" placeholder="请输入你的联系电话">
+	   </div>
+	   <div class="form-group">
+	      <label for="name">吃饭的人数</label>
+	      <select ng-model="order.members" class="form-control">
+	      	<option value="">请选择</option>
+	         <option value="1">1</option>
+	         <option value="2">2</option>
+	         <option value="3">3</option>
+	         <option value="4">4</option>
+	         <option value="5">5</option>
+	         <option value="6">6</option>
+	         <option value="7">7</option>
+	         <option value="8">8</option>
+	      </select>
+	   </div>
+	   <div class="form-group">
+	      <label for="name">味道</label>
+	      <select ng-model="order.hot" class="form-control">
+	      	 <option value="">请选择</option>
+	         <option value="1">微辣</option>
+	         <option value="2">中辣</option>
+	         <option value="3">特辣</option>
+	      </select>
+	   </div>
+	   <div class="form-group">
+	      <label for="name">到店吃饭时间</label>
+	      <input ng-model="order.eat_time" type="time" class="form-control" placeholder="请选择到店时间，必须能准时到">
+	   </div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>荤菜名称</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="menu in hmenuList" ng-click="selectMenu(menu)">
+					<td class="col-lg-12">
+						<div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;">
+				            <label>
+				               <input type="checkbox" ng-checked="menu.checked">{{menu.name}}
+				            </label>
+			         	</div>
+			         </td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>素菜名称</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="menu in smenuList" ng-click="selectMenu(menu)">
+					<td class="col-lg-12">
+						<div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;">
+				            <label>
+				               <input type="checkbox" ng-checked="menu.checked">{{menu.name}}
+				            </label>
+			         	</div>
+			         </td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="form-group">
+	      <label for="name">荤菜重量</label>
+	      <select class="form-control" ng-model="order.meat_weight">
+	      	 <option value="">请选择</option>
+	         <option value=1>1两</option>
+	         <option value=2>2两</option>
+	         <option value=3>3两</option>
+	         <option value=4>4两</option>
+	         <option value=5>5两</option>
+	         <option value=6>6两</option>
+	         <option value=7>7两</option>
+	         <option value=8>8两</option>
+	         <option value=9>9两</option>
+	         <option value=10>10两</option>
+	         <option value=11>11两</option>
+	         <option value=12>12两</option>
+	         <option value=13>13两</option>
+	         <option value=14>14两</option>
+	         <option value=15>15两</option>
+	         <option value=16>16两</option>
+	         <option value=17>17两</option>
+	         <option value=18>18两</option>
+	         <option value=19>19两</option>
+	         <option value=20>20两</option>
+	         <option value=21>21两</option>
+	         <option value=22>22两</option>
+	         <option value=23>23两</option>
+	         <option value=24>24两</option>
+	         <option value=25>25两</option>
+	      </select>
+	   </div>
+	   <div class="form-group">
+	      <label for="name">素菜重量</label>
+	      <select class="form-control" ng-model="order.greens_weight">
+			 <option value="">请选择</option>
+			 <option value=1>1两</option>
+			 <option value=2>2两</option>
+			 <option value=3>3两</option>
+			 <option value=4>4两</option>
+			 <option value=5>5两</option>
+			 <option value=6>6两</option>
+			 <option value=7>7两</option>
+			 <option value=8>8两</option>
+			 <option value=9>9两</option>
+			 <option value=10>10两</option>
+			 <option value=11>11两</option>
+			 <option value=12>12两</option>
+			 <option value=13>13两</option>
+			 <option value=14>14两</option>
+			 <option value=15>15两</option>
+			 <option value=16>16两</option>
+			 <option value=17>17两</option>
+			 <option value=18>18两</option>
+			 <option value=19>19两</option>
+			 <option value=20>20两</option>
+			 <option value=21>21两</option>
+			 <option value=22>22两</option>
+			 <option value=23>23两</option>
+			 <option value=24>24两</option>
+			 <option value=25>25两</option>
+	      </select>
+	   </div>
+	   <div class="form-group text-center">
+	      <input type="button" class="btn btn-warning" value="提交预订" ng-click="submit()">
+	   </div>
+	</form>
+</div>

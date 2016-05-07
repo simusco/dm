@@ -1,0 +1,34 @@
+<div class="container" ng-controller="ChatViewController">
+	<div class="panel panel-default" ng-repeat="key in keys">
+	   <div class="panel-body">
+	   		<div class="panel-heading">
+	   			<h2>
+	   			{{userMap[key.split(',')[0]] == null ? key.split(',')[0] : userMap[key.split(',')[0]].name + '(机器人)'}}
+	   			与
+	   			{{userMap[key.split(',')[1]] == null ? key.split(',')[1] : userMap[key.split(',')[1]].name + '(机器人)'}}
+	   			对话：
+	   			</h2>
+	   		</div>
+		   	<div class="panel-body" >
+		   		<table class="table">
+				   <tbody>
+				      <tr ng-repeat="chat in chatMap[key]" ng-if="chat.chat_type != 'groupchat' && chat.payload.bodies[0].type != 'cmd'">
+				        <td class="col-lg-6">{{userMap[chat.from] == null ? chat.from : use
+				        rMap[chat.from].name + '(机器人)'}}说：{{chat.payload.bodies[0].msg}}</td>
+				        <td class="col-lg-6">
+				        	<input
+				        		type="text" 
+				        		class="form-control" 
+				        		id="name" 
+				        		placeholder="输入回复内容，并按回车键发送" 
+				        		ng-replay="chat"
+				        		ng-if="userMap[chat.from] == null"
+			        		>
+				        </td>
+				      </tr>
+				   </tbody>
+				</table>
+			</div>
+	   </div>
+	</div>
+</div>

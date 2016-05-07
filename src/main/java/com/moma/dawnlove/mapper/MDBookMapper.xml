@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moma.dawnlove.mapper.MDBookMapper">
+	
+	<select id="getMaxOrderNo" resultType="java.lang.Integer">
+		<![CDATA[
+			select if(isnull(max(order_no)),0,max(order_no)) from md_order where DATE_FORMAT(create_time,'%Y-%m-%d') = DATE_FORMAT(#{0},'%Y-%m-%d')
+		]]>
+	</select>
+	
+	<update id="make">
+		<![CDATA[
+			update md_order set processed = 'Y' where id = #{0}
+		]]>
+	</update>
+	
+	<select id="getOrderDetailByOrderId" resultType="com.moma.dawnlove.po.MDOrderDetail">
+		<![CDATA[
+			select
+				id,
+				order_id,
+				menu_id,
+				weight
+			from md_order_detail
+			where order_id = #{0}
+		]]>
+	</select>
+	
+	<select id="getOrderList" resultType="com.moma.dawnlove.po.MDOrder">
+		<![CDATA[
+			select
+				id,
+				create_time,
+				meat_weight,
+				greens_weight,
+				members,
+				eat_time,
+				hot,
+				phone,
+				processed,
+				order_no
+			from md_order
+			where DATE_FORMAT(create_time,'%Y-%m-%d') > DATE_FORMAT(#{0},'%Y-%m-%d')
+			order by 
+				create_time desc, 
+				order_no desc
+		]]>
+	</select>
+	
+	<insert id="saveOrder" parameterType="com.moma.dawnlove.po.MDOrder">
+		<![CDATA[
+			insert into md_order
+			(
+				id,
+				create_time,
+				meat_weight,
+				greens_weight,
+				members,
+				eat_time,
+				hot,
+				phone,
+				processed,
+				order_no
+			) 
+			values
+			(
+				#{id},
+				#{create_time},
+				#{meat_weight},
+				#{greens_weight},
+				#{members},
+				#{eat_time},
+				#{hot},
+				#{phone},
+				'N',
+				#{order_no}
+			)
+		]]>
+	</insert>
+	
+	<insert id="saveOrderDetail" parameterType="com.moma.dawnlove.po.MDOrderDetail">
+		<![CDATA[
+			insert into md_order_detail
+			(id,order_id,menu_id,weight) 
+			values
+			(#{id},#{order_id},#{menu_id},#{weight})
+		]]>
+	</insert>
+	
+	<select id="getMenuById" resultType="com.moma.dawnlove.po.MDMenu">
+		<![CDATA[
+			select
+				id,
+				name,
+				description,
+				image_url,
+				type,
+				sort,
+				supply
+			from md_menu
+			where supply = 'Y' and id = #{0}
+		]]>
+	</select>
+	
+	<select id="getMenuList" resultType="com.moma.dawnlove.po.MDMenu">
+		<![CDATA[
+			select
+				id,
+				name,
+				description,
+				image_url,
+				type,
+				sort,
+				supply
+			from md_menu
+			where supply = 'Y'
+		]]>
+	</select>
+	
+</mapper>
